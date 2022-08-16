@@ -1,3 +1,4 @@
 print("Hello, it's a wonderful world.")
-_author_= "730549088"
+"""My first program for COMP110."""
+__author__= "730549088"
 
