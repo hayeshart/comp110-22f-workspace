@@ -1,0 +1,3 @@
+WHITE_BOX: str = "\U00002B1C"
+
+print(WHITE_BOX)
