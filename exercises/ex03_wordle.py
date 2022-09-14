@@ -1,15 +1,15 @@
 """EX03 - Structured Wordle."""
 
-__author__: "730549088"
+__author__ = "730549088"
 
 WHITE_BOX: str = "\U00002B1C"
 GREEN_BOX: str = "\U0001F7E9"
 YELLOW_BOX: str = "\U0001F7E8"
 
 
-def contains_char (search_second: str, single_character: str) -> bool: 
-    assert len(single_character) == 1 
-    """Search_second is searching through single_character and iterating through the string to check for a match. """
+def contains_char(search_second: str, single_character: str) -> bool: 
+    """Search_second is searching through single_character and iterating through the string to check for a match."""
+    assert len(single_character) == 1
     while search_second > '':
         if search_second[0] == single_character:
             return True
@@ -17,8 +17,9 @@ def contains_char (search_second: str, single_character: str) -> bool:
             search_second = search_second[1:]
     return False
 
-def emojified (six_letter_word: str, secret_word: str) -> str: 
-    """This function checks the user's six_letter_guess against the secret_word to give them the appopriate box.  """
+
+def emojified(six_letter_word: str, secret_word: str) -> str: 
+    """This function checks the user's six_letter_guess against the secret_word to give them the appopriate box."""
     assert len(six_letter_word) == len(secret_word)
     blank_box: str = ""
     counter: int = 0
@@ -32,19 +33,21 @@ def emojified (six_letter_word: str, secret_word: str) -> str:
         counter += 1
     return blank_box
 
-def input_guess (n: int) -> str:
+
+def input_guess(n: int) -> str:
     """This function allows the user to insert a guess for the wordle."""
     prompt = input(f"Enter a {n} character word: ")
     while len(prompt) != n:
         prompt = input(f"That wasn't {n} chars! Try again: ")
     return prompt
 
+
 def main() -> None: 
     """The entrypoint of the program and main game loop."""
     turn: int = 0
     secret_word: str = "codes"
-    while turn <=5: 
-        turn +=1 
+    while turn <= 5: 
+        turn += 1 
         print(f"=== Turn {turn}/6 ===")
         guessed_word: str = input_guess(len(secret_word))
         print(emojified(guessed_word, secret_word))
