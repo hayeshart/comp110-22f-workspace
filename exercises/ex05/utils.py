@@ -4,11 +4,11 @@ __author__ = "730549088"
 
 
 def only_evens(list_1: list[int]) -> list[int]:
-    #This function takes a list of intergers and returns only the even numbers from the list
+    """This function takes a list of intergers and returns only the even numbers from the list."""
     only_even_list: list = [] 
     counter: int = 0 
     while counter < len(list_1): 
-        #When the number is divided by 2, the remainder should be 0 if it is an even number
+        """When the number is divided by 2, the remainder should be 0 if it is an even number."""
         if (list_1[counter] % 2) == 0: 
             only_even_list.append(list_1[counter])
         counter += 1
@@ -16,16 +16,23 @@ def only_evens(list_1: list[int]) -> list[int]:
 
 
 def concat(list_2: list[int], list_3: list[int]) -> list[int]:
-    #This function takes two lists and adds the second list after the first list to create a singular list 
+    """This function takes two lists and adds the second list after the first list to create a singular list."""
     conjoined_list: list = []
     conjoined_list = list_2 + list_3
     return conjoined_list
 
 
 def sub(list_4: list[int], start: int, end: int) -> list[int]: 
-    #This function takes a list and returns the values between specific start and end indexs - 1
+    """This function takes a list and returns the values between specific start and end indexs - 1."""
     n: int = start
     subset_list: list = [] 
+    if start < 0: 
+        start == 0
+        n = 0
+    elif end > int(len(list_4)): 
+        end = int(len(list_4))
+    elif int(len(list_4)) == 0: 
+        return []
     while (start <= n <= (end - 1)): 
         subset_list.append(list_4[n])
         n += 1 
