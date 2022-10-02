@@ -36,8 +36,8 @@ def emojified(six_letter_word: str, secret_word: str) -> str:
 
 def input_guess(n: int) -> str:
     """This function allows the user to insert a guess for the wordle."""
-    prompt = input(f"Enter a {n} character word: ")
-    while len(prompt) != n:
+    prompt: str = input(f"Enter a {n} character word: ")
+    while len(prompt) != n: 
         prompt = input(f"That wasn't {n} chars! Try again: ")
     return prompt
 
@@ -46,12 +46,14 @@ def main() -> None:
     """The entrypoint of the program and main game loop."""
     turn: int = 0
     secret_word: str = "codes"
-    while turn <= 5: 
+    correct: bool = False
+    while turn < 6 and not correct: 
         turn += 1 
         print(f"=== Turn {turn}/6 ===")
         guessed_word: str = input_guess(len(secret_word))
         print(emojified(guessed_word, secret_word))
-        if turn > 5: 
-            print("X/6 - Sorry, try again tomorrow! ")
-        elif guessed_word == secret_word: 
+        if guessed_word == secret_word: 
             print(f"You won in {turn}/6 turns!")
+            correct = True
+        elif turn > 5: 
+            print("X/6 - Sorry, try again tomorrow! ")
