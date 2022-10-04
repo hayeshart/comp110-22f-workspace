@@ -1,16 +1,21 @@
 """EX06 - Choose Your Own Adventure."""
 
 
-__author__: "730549088"
+__author__ = "730549088"
+
+import re
+
+
+points: int = 0 
+SPARKLE: str = "\U00002728"
+player: str = ""
 
 
 def main() -> None: 
+    """This is the main function that controls the order in which all of the other functions are run.""" 
     global points
-    points = 0
-    global SPARKLE
-    SPARKLE = "\U00002728"
     greet()
-    instructions()
+    begin()
     question_1_prompt()
     question_1_response()
     question_2_prompt()
@@ -18,43 +23,98 @@ def main() -> None:
     question_3_prompt()
     question_3_response()
     question_4_prompt()
-    question_4_response()
+    points = question_4_response(points)
     results()
     user_satisfied()
     game_loop()
 
 
 def greet() -> None:
+    """This function starts the program by introducing the topic."""
+    """It prompts the user to input their name and prints out the instructions for the quiz."""
     print("Hello! Let's find out what Disney Princess you are!")
     print()
     global player
     player = input("First, what is your name? ")
     print()
-    print(f'Nice to meet you, {player}! Here are some instructions:')
-    print("1. Please input the letter associated with your answer choice.")
-    print("2. Your results will be based on the number of points you score.")
-    print("3. Have fun while playing!")
-    print()
+    print(f"Nice to meet you, {player}!")
         
 
 def instructions() -> None: 
+    """This function asks the user if they understand the instructions provided in the previous function."""
+    """If the user doesn't understand, the program is stopped and the user has to restart from the beginning."""
+    """If the user does understand, the programa is continued."""
     understand_instructions: str = input("Do you understand? ")
     if understand_instructions == "Yes":
         print(f"Yay! Let's begin, {player}.")
     elif understand_instructions == "yes": 
         print(f"Yay! Let's begin, {player}.")
     elif understand_instructions == "No": 
-        print("I'm sorry about that. Please play again another time then.")
-        quit()
+        print("I'm sorry about that. Here they are again.")
+        print()
+        print("1. Please input the letter associated with your answer choice.")
+        print("2. Your results will be based on the number of points you score.")
+        print("3. Have fun while playing!")
+        print()
+        return instructions()
     elif understand_instructions == "no": 
-        print("I'm sorry about that. Please play again another time then.")
-        quit()
+        print("I'm sorry about that. Here they are again.")
+        print()
+        print("1. Please input the letter associated with your answer choice.")
+        print("2. Your results will be based on the number of points you score.")
+        print("3. Have fun while playing!")
+        print()
+        return instructions()
     else:
         print("Error: Not an accepted response. Please try again.")
+        print()
+        print("1. Please input the letter associated with your answer choice.")
+        print("2. Your results will be based on the number of points you score.")
+        print("3. Have fun while playing!")
+        print()
         return instructions()
 
 
+def begin() -> None: 
+    print()
+    ready_to_start: str = input("Would like to go straight to results, the first question, or see the intstructions? ")
+    if ready_to_start == "First question":
+        print("Great! Here's the first question.")
+    elif ready_to_start == "Question": 
+        print("Great! Here's the first question.")
+    elif ready_to_start == "first question": 
+        print("Great! Here's the first question.")
+    elif ready_to_start == "question": 
+        print("Great! Here's the first question.")
+    elif ready_to_start == "results": 
+        points = 0 
+        results()
+        user_satisfied()
+        game_loop()
+    elif ready_to_start == "see the instructions": 
+        print()
+        print("Okay! Here they are...")
+        print("1. Please input the letter associated with your answer choice.")
+        print("2. Your results will be based on the number of points you score.")
+        print("3. Have fun while playing!")
+        print()
+        instructions()
+    elif ready_to_start == "instructions": 
+        print()
+        print("Okay! Here they are...")
+        print("1. Please input the letter associated with your answer choice.")
+        print("2. Your results will be based on the number of points you score.")
+        print("3. Have fun while playing!")
+        print()
+        instructions()
+    else: 
+        print("Error: That is not an accepted response. Please try again.")
+        begin()
+    
+
+
 def question_1_prompt() -> None: 
+    """This function prints out the prompt for the first question and the possible answer choices."""
     print()
     print("First Question:")
     print("What is your favorite color?")
@@ -65,7 +125,9 @@ def question_1_prompt() -> None:
 
 
 def question_1_response() -> None: 
-    q1_answer: str = input("Answer: ")
+    """This function asks the user for an answer to the first question."""
+    """Depending on their input, the value of global points is reassigned."""
+    q1_answer: str = input(f"{player}, what is your answer: ")
     if q1_answer == "A":
         global points
         points += 1
@@ -97,6 +159,7 @@ def question_1_response() -> None:
 
 
 def question_2_prompt() -> None: 
+    """This function prints the second question and the answer choices after a brief comment."""
     print()
     print(f'Three more questions, {player}!')
     print()
@@ -109,7 +172,9 @@ def question_2_prompt() -> None:
 
 
 def question_2_response() -> None:
-    q2_answer: str = input("Answer: ")
+    """This function asks the user to input an answer to question 2."""
+    """Depending on their feedback, the value of global points is changed."""
+    q2_answer: str = input(f"{player}, what is your answer: ")
     if q2_answer == "A":
         global points
         points += 4
@@ -141,6 +206,7 @@ def question_2_response() -> None:
 
 
 def question_3_prompt() -> None: 
+    """This function prints out the prompt and answer choices for the third question after giving the user some encouragement."""
     print()
     print(f'That was a good choice, {player}!')
     print()
@@ -153,7 +219,9 @@ def question_3_prompt() -> None:
 
 
 def question_3_response() -> None:
-    q3_answer: str = input("Answer: ")
+    """This function prompts the user to input their answer to the third question."""
+    """Depending on their answer, the value of global points is changed."""
+    q3_answer: str = input(f"{player}, what is your answer: ")
     if q3_answer == "A":
         global points
         points += 3
@@ -185,6 +253,7 @@ def question_3_response() -> None:
 
 
 def question_4_prompt() -> None: 
+    """This function prints out the prompt and answer choices for the 4th question."""
     print()
     print(f"{player}, it's the last question!")
     print()
@@ -196,10 +265,11 @@ def question_4_prompt() -> None:
     print("D) Quiet")
 
 
-def question_4_response() -> None: 
-    q4_answer: str = input("Answer: ")
+def question_4_response(points:int) -> int: 
+    """This function asks the user what their answer to the fourth question."""
+    """It changes the global point value to reflect their answer choice by reassigning the local variable points to the global one."""
+    q4_answer: str = input(f"{player}, what is your answer: ")
     if q4_answer == "A":
-        global points
         points += 4
     elif q4_answer == "a": 
         points += 4
@@ -217,11 +287,13 @@ def question_4_response() -> None:
         points += 2
     else: 
         print("Error: That is not an accepted response. Please try again.")
-        return question_4_response() 
+        return question_4_response(points) 
+    return points
 
-
-def results() -> None: 
+def results() -> None:
+    """This function sees how many points the user has and uses this knowledge to determine the user's results."""
     print()
+    """This section uses randint to play a little prank on the user. It tells the user that they have a large amount of points before correcting itself."""
     print("Let's see how many total points you have...")
     print()
     import random
@@ -235,8 +307,14 @@ def results() -> None:
     print(f"You have {points} points!")
     print()
     print("That means...")
-    
-    if points <= 5: 
+    """Based on the user's points from the quiz, their results are any of the following."""
+    if points == 0: 
+        print()
+        print("I was unable to determine which Disney Princess you are because you did not gain any points.")
+        print()
+        print(f"Perhaps, {player}, you should take a quiz to see what Disney villian you are...")
+        print()
+    if 0 < points <= 5:
         print()
         cinderella()
         print(f"{player}, you're Cinderella!")
@@ -263,6 +341,7 @@ def results() -> None:
         
 
 def cinderella() -> None:
+    """This function has all of the emojis used to surround getting the result of Cinderella."""
     FAIRY_EMOJI: str = "\U0001F9DA"
     CLOCK: str = "\U0001F55B"
     MOON: str = "\U0001F315"
@@ -273,6 +352,7 @@ def cinderella() -> None:
 
 
 def belle() -> None: 
+    """This function has all of the emojis used to surround getting the result of Belle."""
     BOOKS: str = "\U0001F4DA"
     ROSE: str = "\U0001F339"
     TEAPOT: str = "\U0001FAD6"
@@ -283,6 +363,7 @@ def belle() -> None:
 
 
 def jasmine() -> None:
+    """This function has all of the emojis used to surround getting the result of Jasmine."""
     GENIE: str = "\U0001F9DE"
     TIGER: str = "\U0001F405"
     STAR: str = "\U0001F320"
@@ -293,6 +374,7 @@ def jasmine() -> None:
 
 
 def rapunzel() -> None:
+    """This function has all of the emojis used to surround getting the result of Rapunzel."""
     HAIRCUT: str = "\U0001F487"
     LIZARD: str = "\U0001F98E"
     SHOOTING_STAR: str = "\U0001F320"
@@ -303,6 +385,7 @@ def rapunzel() -> None:
 
 
 def user_satisfied() -> None: 
+    """This function sees if the user was statisfied with the quiz."""
     satisfaction: str = input(f"Did you enjoy this quiz, {player}? ")
     if satisfaction == "No": 
         print("Aw, I'm sorry about that.")
@@ -319,6 +402,9 @@ def user_satisfied() -> None:
     
 
 def game_loop() -> None: 
+    """This function sees if the user would like to take the quiz again."""
+    """If they do, the main function is run again. If not, the user is thanked and the progrma is stopped."""
+    global points
     play_again: str = input("Would you like to take the quiz again? ")
     if play_again == "No": 
         print(f"Thanks for playing then! Goodbye for now, {player}.")
@@ -327,11 +413,13 @@ def game_loop() -> None:
         print(f"Thanks for playing then! Goodbye for now, {player}.")
         quit()
     elif play_again == "Yes": 
-        print(f"Sweet! Let's go!")
+        print("Sweet! Let's go!")
+        points = 0
         main()
     elif play_again == "yes": 
-        print(f"Sweet! Let's go!")
+        print("Sweet! Let's go!")
         print()
+        points = 0
         main()
     else: 
         print("Error: Not an accepted response.")
