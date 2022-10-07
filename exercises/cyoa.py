@@ -3,8 +3,6 @@
 
 __author__ = "730549088"
 
-import re
-
 
 points: int = 0 
 SPARKLE: str = "\U00002728"
@@ -42,7 +40,7 @@ def greet() -> None:
 
 def instructions() -> None: 
     """This function asks the user if they understand the instructions provided in the previous function."""
-    """If the user doesn't understand, the program is stopped and the user has to restart from the beginning."""
+    """If the user doesn't understand, the instructions are repeated and the user is asked if they understood the second time."""
     """If the user does understand, the programa is continued."""
     understand_instructions: str = input("Do you understand? ")
     if understand_instructions == "Yes":
@@ -76,6 +74,8 @@ def instructions() -> None:
 
 
 def begin() -> None: 
+    """This function gives the user three possible paths to take."""
+    """They can either begin the quiz, go straight to results, or see the instructions."""
     print()
     ready_to_start: str = input("Would like to go straight to results, the first question, or see the intstructions? ")
     if ready_to_start == "First question":
@@ -87,9 +87,7 @@ def begin() -> None:
     elif ready_to_start == "question": 
         print("Great! Here's the first question.")
     elif ready_to_start == "results": 
-        points = 0 
         results()
-        user_satisfied()
         game_loop()
     elif ready_to_start == "see the instructions": 
         print()
@@ -112,8 +110,7 @@ def begin() -> None:
         begin()
     
 
-
-def question_1_prompt() -> None: 
+def question_1_prompt() -> None:
     """This function prints out the prompt for the first question and the possible answer choices."""
     print()
     print("First Question:")
@@ -265,7 +262,7 @@ def question_4_prompt() -> None:
     print("D) Quiet")
 
 
-def question_4_response(points:int) -> int: 
+def question_4_response(points: int) -> int: 
     """This function asks the user what their answer to the fourth question."""
     """It changes the global point value to reflect their answer choice by reassigning the local variable points to the global one."""
     q4_answer: str = input(f"{player}, what is your answer: ")
@@ -289,6 +286,7 @@ def question_4_response(points:int) -> int:
         print("Error: That is not an accepted response. Please try again.")
         return question_4_response(points) 
     return points
+
 
 def results() -> None:
     """This function sees how many points the user has and uses this knowledge to determine the user's results."""
@@ -421,11 +419,29 @@ def game_loop() -> None:
         print()
         points = 0
         main()
+    elif play_again == "maybe": 
+        print()
+        print(f"I know, {player}, let's draw a random number to see if you should play again!")
+        print("If it's even, let's play again. If it's odd, you can be done.")
+        print()
+        import random
+        random_number = str(random.randint(0, 100000))
+        print("You drew " + random_number + ".")
+        print()
+        if int(random_number) % 2 == 0: 
+            print(f"Awesome, {player}, it's even!")
+            print("Let's play again!")
+            print()
+            points = 0
+            main()
+        else: 
+            print(f"Aw, it's an odd number, {player}.")
+            print(f"Thanks for playing then! Goodbye for now, {player}.")
+            quit()
     else: 
         print("Error: Not an accepted response.")
         return game_loop()
 
 
-
-if __name__ == "__main__": 
+if __name__ == "__main__":
     main()
