@@ -1,4 +1,4 @@
-""" EX07 - Dictionary Functions Tests """
+"""EX07 - Dictionary Functions Tests."""
 
 
 __author__ = "730549088"
@@ -9,7 +9,7 @@ from exercises.ex07.dictionary import favorite_color, invert, count
 
 def test_invert_use_case_1() -> None: 
     """This test checks to see when the function is given a large dictionary it correctly inverts its keys and values."""
-    xs: dict[str, str] = {'a': 'z', 'b' : 'y', 'c': 'x'}
+    xs: dict[str, str] = {'a': 'z', 'b': 'y', 'c': 'x'}
     assert invert(xs) == {'z': 'a', 'y': 'b', 'x': 'c'}
 
 
@@ -21,14 +21,14 @@ def test_invert_use_case_2() -> None:
 
 def test_invert_edge_case() -> None: 
     """This tests checks if invert will return an empty dict when giving an empty dict."""
-    xs: dict[str, str] = {'':''}
-    assert invert(xs) == {'':''}
+    xs: dict[str, str] = {'': ''}
+    assert invert(xs) == {'': ''}
 
 
-def test_invert_use_case_3() -> None:
+def test_invert_use_case_3() -> None: 
     """This tests checks if invert will correctly invert when giving a dict with one key and value pair being an empty dict."""
-    xs: dict[str, str] = {'':'', 'Piano': 'Awesome', 'Guitar': 'Cool', 'Coding': 'Bad'}
-    assert invert(xs) == {'':'', 'Awesome': 'Piano', 'Cool': 'Guitar', 'Bad': 'Coding'}
+    xs: dict[str, str] = {'': '', 'Piano': 'Awesome', 'Guitar': 'Cool', 'Coding': 'Bad'}
+    assert invert(xs) == {'': '', 'Awesome': 'Piano', 'Cool': 'Guitar', 'Bad': 'Coding'}
 
 
 def test_favorite_color_use_case_1() -> None: 
@@ -37,13 +37,7 @@ def test_favorite_color_use_case_1() -> None:
     assert favorite_color(xs) == 'Pink'
 
 
-def test_favorite_color_use_case_1() -> None: 
-    """This test checks to see when the function is given a large dictionary it returns the color that appears most frequently."""
-    xs: dict[str, str] = {'Panda': 'Orange', 'Pig': 'Pink', 'Horse': 'Yellow', 'Flamingo': 'Pink', 'Rabbit': 'Pink', 'Hippo': 'Yellow', 'Bee': 'Pink'}
-    assert favorite_color(xs) == 'Pink'
-
-
-def test_favorite_color_use_case_2() -> None: 
+def test_favorite_color_use_case_2() -> None:  
     """This test checks to see when the function is given a small dictionary it returns the color that appears most frequently."""
     xs: dict[str, str] = {"Marc": "yellow", "Ezri": "blue", "Kris": "blue"}
     assert favorite_color(xs) == 'blue'
