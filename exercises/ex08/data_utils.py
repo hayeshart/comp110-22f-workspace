@@ -5,7 +5,7 @@ __author__ = "730549088"
 # Define your functions below
 
 from csv import DictReader
-from unittest import result
+
 
 def read_csv_rows(filename: str) -> list[dict[str, str]]:
     """Read the rows of a csv into a 'table'."""
@@ -27,7 +27,7 @@ def read_csv_rows(filename: str) -> list[dict[str, str]]:
     return result
 
 
-def column_values(table:list[dict[str,str]], column: str) -> list[str]:
+def column_values(table: list[dict[str, str]], column: str) -> list[str]:
     """Produce a list[str] of all values in a single column."""
     result: list[str] = []
     for row in table:
@@ -61,9 +61,10 @@ def head(not_mutated_table: dict[str, list[str]], rows: int) -> dict[str, list[s
 def select(not_mutated_table: dict[str, list[str]], given_column_names: list[str]) -> dict[str, list[str]]: 
     """Creates a subset of the table for specific columns."""
     result: dict[str, list[str]] = {}
+    column: str = ""
+    table_values: str = ""
     for column in given_column_names: 
         for table_values in not_mutated_table[column]:
-            table_values: list[str] = []
             result[column] = not_mutated_table[column]
     return result 
 
@@ -71,27 +72,24 @@ def select(not_mutated_table: dict[str, list[str]], given_column_names: list[str
 def concat(not_mutated_table_1: dict[str, list[str]], not_mutated_table_2: dict[str, list[str]]) -> dict[str, list[str]]:
     """Combines two tables together without any repitition."""
     result: dict[str, list[str]] = {}
+    column: str = ""
     for column in not_mutated_table_1: 
-        new_table_values: list[str] = []
-        new_table_values = result[column] = not_mutated_table_1[column]
+        result[column] = not_mutated_table_1[column]
     for column in not_mutated_table_2:
         if column in not_mutated_table_1:
             result[column] += not_mutated_table_2[column]
         else:
-            new_table_values: list[str] = []
-            new_table_values = result[column] = not_mutated_table_2[column]
+            result[column] = not_mutated_table_2[column]
     return result
-
 
 
 def count(given_list: list[str]) -> dict[str, int]:
     """Creates a dict where each key is a unique value and the value is the frequency of the key."""
-    result: dict[str, list[str]] = {}
-    count: int = 0 
+    result: dict[str, int] = {}
+    count: str = "" 
     for count in given_list: 
         if count in result: 
             result[count] += 1 
-        else: 
-            frequencies: list[str] = []
-            frequencies = result[count] = 1 
+        else:
+            result[count] = 1 
     return result 
